@@ -1,0 +1,102 @@
+
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milakatze123's Scratch Profil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #profile-image {
+            position: absolute;
+            top: 0;
+            right: 0;
+			cursor: pointer
+        }
+        #scratch-logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+			cursor: pointer
+        }
+        #message-button {
+            position: absolute;
+            top: 0;
+            left: 200px; /* Neue Position für den Nachrichtenzähler-Knopf */
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        #project-iframe {
+            display: block;
+            margin: 20px auto;
+        }
+        #rate-project-button {
+            display: block;
+            margin: 20px auto;
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        #project-list-button {
+            display: block;
+            margin: 20px auto;
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <img id="profile-image" src="assets/profil.gif" alt="Milakatze123's Profilbild" onclick="openProfile()">
+    <img id="scratch-logo" src="assets/scrlogo.svg" alt="Scratch Logo" onclick="playSound()">
+    <button id="message-button" onclick="openMessageDialog()">Nachrichtenzähler</button>
+    <iframe id="project-iframe" src="https://scratch.mit.edu/projects/813884200/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+    <button id="rate-project-button" onclick="openProjectComments()">Bewerte das Projekt</button>
+    <button id="project-list-button" onclick="openProjectList()">Projektliste</button>
+
+    <script>
+        function openProfile() {
+            // Öffne das Profil
+            window.location.href = 'https://scratch.mit.edu/users/milakatze123/';
+        }
+
+        function playSound() {
+            // Spiele den Sound ab
+            var audio = new Audio('assets/scr.wav');
+            audio.play();
+        }
+
+        function openMessageDialog() {
+            // Hole den Nachrichtenzähler von der API
+            fetch('https://api.scratch.mit.edu/users/milakatze123/messages/count/')
+                .then(response => response.json())
+                .then(data => {
+                    alert('Nachrichtenzähler: ' + data.count);
+                })
+                .catch(error => {
+                    alert('Scratch API hat die Verbindung verweigert! Bitte versuche es später erneut.');
+                });
+        }
+
+        function openProjectComments() {
+            // Öffne die Projektbewertungen
+            window.open('https://scratch.mit.edu/projects/813884200/#comments', '_blank');
+        }
+
+        function openProjectList() {
+            // Öffne die Projektliste
+            window.open('https://milakatze123.netlify.app/projects/list.html', '_blank');
+        }
+    </script>
+</body>
+</html>
